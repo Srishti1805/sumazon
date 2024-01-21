@@ -145,8 +145,8 @@ SIMPLE_JWT = {
 # Rest Framework Configuration
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%Y-%m-%dT%S:%M:%H",
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
@@ -157,6 +157,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
     ],
 }
 
@@ -165,3 +166,4 @@ APPEND_SLASH = False
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR /'media'
+CORS_ALLOW_ALL_ORIGINS = True

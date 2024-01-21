@@ -14,6 +14,7 @@ from rest_framework.views import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from .serializers import UsersSerializer
 
 
 
@@ -26,17 +27,6 @@ class RegisterUserView(APIView):
         try:
             data = request.data
             serializer = RegisterSerializer(data = data)
-            email = request.data.get('email', None)
-            # user = Users.objects.get(email=email)
-            # if user.isVerified:
-            #     return Response("User already register", status=status.HTTP_400_BAD_REQUEST)
-            # else:
-            #     user.delete()
-            # userInput = request.data
-            # userInput['otp'] = str(random.randint(100000, 999999))
-            # userInput["signInMethod"] = "email"
-            # serializer = RegisterSerializer(data=userInput)
-
             if serializer.is_valid():
                 serializer.save()  # user is saved in db
                 return Response("ok", status.HTTP_201_CREATED)
@@ -47,7 +37,11 @@ class RegisterUserView(APIView):
             Response("Internal Server Error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-
+class UsersView(ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+    search_fields = ("username",)
+    ordering = ("-id")
 
 
 
