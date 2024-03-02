@@ -169,3 +169,18 @@ APPEND_SLASH = False
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+# SWAGGER CONFIGURATION
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT token format: Bearer <token>",
+        }
+    },
+}
+
+LOGIN_URL = "/login/"
